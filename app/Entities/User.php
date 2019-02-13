@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Transformable
 {
     use Notifiable;
+    use TransformableTrait;
 
     /**
      * The attributes that are mass assignable.
