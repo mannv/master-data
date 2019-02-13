@@ -38,5 +38,14 @@ class UserRepositoryEloquent extends MyRepositoryEloquent implements UserReposit
         return $this->orderBy('id', 'DESC')->all();
     }
 
+    public function saveToken($token, $userId)
+    {
+        return $this->update(['user_token' => $token], $userId);
+    }
+
+    public function getUserById($id)
+    {
+        return $this->find($id);
+    }
 
 }

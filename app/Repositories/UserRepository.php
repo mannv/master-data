@@ -12,4 +12,8 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface UserRepository extends RepositoryInterface
 {
     public function getAllUsers();
+
+    public function saveToken($token, $userId);
+
+    public function getUserById($id);
 }
