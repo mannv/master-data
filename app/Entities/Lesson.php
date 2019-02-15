@@ -15,6 +15,13 @@ class Lesson extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['course_id', 'name', 'youtube_video', 'duration', 'is_free'];
+    protected $fillable = ['course_id', 'name', 'youtube_video', 'duration', 'is_free', 'weight'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function course()
+    {
+        return $this->hasOne(Course::class, 'id', 'course_id');
+    }
 }

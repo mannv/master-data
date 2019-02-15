@@ -21,6 +21,7 @@ class CreateLessonsTable extends Migration
             $table->string('name');
             $table->string('youtube_video');
             $table->integer('duration');
+            $table->integer('weight')->default(0);
             $table->boolean('is_free');
             $table->timestamps();
         });

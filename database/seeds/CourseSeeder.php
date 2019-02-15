@@ -22,13 +22,14 @@ class CourseSeeder extends Seeder
             $row = app(\App\Repositories\CourseRepository::class)->add($item->toArray());
 
             $totalLesson = $this->faker->biasedNumberBetween(5, 18);
-            for ($i = 0; $i < $totalLesson; $i++) {
+            for ($i = 1; $i <= $totalLesson; $i++) {
                 $lesson = [
                     'course_id' => $row['data']['id'],
                     'name' => $this->faker->name,
                     'youtube_video' => 'https://www.youtube.com/watch?v=NzH9GO3gJlU',
                     'duration' => $this->faker->biasedNumberBetween(120, 500),
-                    'is_free' => ($i < 3 ? true : false)
+                    'weight' => $i,
+                    'is_free' => ($i <= 3 ? true : false)
                 ];
                 app(\App\Repositories\LessonRepository::class)->add($lesson);
             }

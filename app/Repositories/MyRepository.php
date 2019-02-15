@@ -12,4 +12,10 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface MyRepository extends RepositoryInterface
 {
     public function add($attributes = []);
+
+    public function getAll();
+
+    public function getById($id, $with = []);
+
+    public function getAllWithPaginate();
 }

@@ -26,4 +26,19 @@ class MyRepositoryEloquent extends BaseRepository implements MyRepository
         return $this->create($attributes);
     }
 
+    public function getAll()
+    {
+        return $this->orderBy('id', 'DESC')->all();
+    }
+
+    public function getById($id, $with = [])
+    {
+        return $this->with($with)->find($id);
+    }
+
+    public function getAllWithPaginate()
+    {
+        return $this->paginate();
+    }
+
 }

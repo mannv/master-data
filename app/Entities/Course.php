@@ -17,4 +17,11 @@ class Course extends BaseModel
      */
     protected $fillable = ['name', 'cover_image', 'description'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'course_id', 'id')->orderBy('weight');
+    }
 }
