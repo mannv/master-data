@@ -28,7 +28,7 @@ class UserController extends ApiController
             'password' => $password
         ]);
         if (!$checkAuth) {
-            return $this->responseError('Email or password incorrect');
+            return $this->responseError(__('Email or password incorrect'));
         }
 
         $this->makeTokenPasswordGrant($email, $password);

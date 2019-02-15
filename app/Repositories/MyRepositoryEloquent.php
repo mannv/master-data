@@ -9,7 +9,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
  *
  * @package namespace App\Repositories;
  */
-class MyRepositoryEloquent extends BaseRepository
+class MyRepositoryEloquent extends BaseRepository implements MyRepository
 {
     /**
      * Specify Model class name
@@ -19,6 +19,11 @@ class MyRepositoryEloquent extends BaseRepository
     public function model()
     {
         //
+    }
+
+    public function add($attributes = [])
+    {
+        return $this->create($attributes);
     }
 
 }
