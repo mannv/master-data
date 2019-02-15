@@ -32,7 +32,7 @@ $api->version('v1', $rateLimit, function (\Dingo\Api\Routing\Router $api) {
 });
 
 $rateLimit = [
-    'middleware' => 'auth:api',
+    'middleware' => ['auth:api'],
     'namespace' => 'App\API\V1\Controllers'
 ];
 $api->version('v1', $rateLimit, function (\Dingo\Api\Routing\Router $api) {
