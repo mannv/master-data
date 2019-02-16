@@ -8,6 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import ServiceAPI from './services/ServiceAPI'
+window.API = new ServiceAPI();
 
 /**
  * The following block of code may be used to automatically register your

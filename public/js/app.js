@@ -1975,16 +1975,8 @@ __webpack_require__.r(__webpack_exports__);
     loadFeatureCourse: function loadFeatureCourse() {
       var _this = this;
 
-      var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIzN2QzMjQ2NzJlZTcxZDgyNjAxMzNjOGUwOWNlMDM1MGMyMGQ4YzBhNTU2OTVhNzQyYzY3MjFlNmEzZDU3ZmUxZDkzN2ZhOThhZmExYTU4In0.eyJhdWQiOiIyIiwianRpIjoiYjM3ZDMyNDY3MmVlNzFkODI2MDEzM2M4ZTA5Y2UwMzUwYzIwZDhjMGE1NTY5NWE3NDJjNjcyMWU2YTNkNTdmZTFkOTM3ZmE5OGFmYTFhNTgiLCJpYXQiOjE1NTAyNTk0MzgsIm5iZiI6MTU1MDI1OTQzOCwiZXhwIjoxNTUyNjc4NjM4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.SrdpW2M148o7QVaufUIl-ZHnuWQAtyeF38zn5TyWiNTCmOQH9q0r7iiaF2J35EUVuXsIplN6cIMUOtIQgwm9kGPRaf982KaVIt0ki8XO3j2N1IefBygAQXV41lSEf1UBLK78uD39qZEYtKPWfi66jRbsXfVdFY45IJelNH_8OEzfl-urQnjHwwr3uuUvtNHEbiGxs6sAXKEY7f1fXNoCviKpKU4ls0sTdJYApg3ugF3mASLkAWk_2xbGh-Wxw4MeHkBLM0ggHD-wLYvd0SdZILcfGdszzPIgUFNy1vSSUqHga-ZRwkhOT8B5Nx1EJaOZHHGOfwnGuikPnNC_HsDI3AQrjQ0-952U0YkExD0cZvx4sKwYwW0fdiWrjPD9Q1Vt-9BEHERxkCGCtBrZMICDfO1vEEkFMQnxs8hl2zS9n7k3CRH6rSxes2t9FZk360OCUJ0OujqrN4huMD2abz1i-dZbgPw38iMPx8eq1kM-_OW0p1FABLpeW-RGoQlVTVHt0ZBFjSUAfgni5kDsywt587X4_eluiJbUwqYcgYr5PpRg6ypl7BzMmoCNT3AOIoT4YqjsNSkrsS-12Q0xXHPdUjItQrLZle93aAwCLFhuh_B0CLCeK7ladpEkSXQhXMJrL8aQBPsjZuUbLXBw97FAhO9v68mjrR3PUDWrIR-VKWE";
-      var config = {
-        headers: {
-          "Authorization": "Bearer " + token
-        }
-      };
-      console.log(config);
-      axios.get('http://master-data.local/api/course', config).then(function (response) {
-        _this.listCourse = response.data.data;
-        console.log(_this.listCourse);
+      API.loadFeatureCourse(function (response) {
+        _this.listCourse = response;
       });
     }
   }
@@ -49639,9 +49631,12 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_ServiceAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/ServiceAPI */ "./resources/js/services/ServiceAPI.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49650,6 +49645,8 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+window.API = new _services_ServiceAPI__WEBPACK_IMPORTED_MODULE_0__["default"]();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -50145,6 +50142,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeatureCourseItemComponent_vue_vue_type_template_id_53d48726___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FeatureCourseItemComponent_vue_vue_type_template_id_53d48726___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/services/ServiceAPI.js":
+/*!*********************************************!*\
+  !*** ./resources/js/services/ServiceAPI.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ServiceAPI; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ServiceAPI =
+/*#__PURE__*/
+function () {
+  function ServiceAPI() {
+    _classCallCheck(this, ServiceAPI);
+  }
+
+  _createClass(ServiceAPI, [{
+    key: "loadFeatureCourse",
+    value: function loadFeatureCourse(responseCallback) {
+      var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIzN2QzMjQ2NzJlZTcxZDgyNjAxMzNjOGUwOWNlMDM1MGMyMGQ4YzBhNTU2OTVhNzQyYzY3MjFlNmEzZDU3ZmUxZDkzN2ZhOThhZmExYTU4In0.eyJhdWQiOiIyIiwianRpIjoiYjM3ZDMyNDY3MmVlNzFkODI2MDEzM2M4ZTA5Y2UwMzUwYzIwZDhjMGE1NTY5NWE3NDJjNjcyMWU2YTNkNTdmZTFkOTM3ZmE5OGFmYTFhNTgiLCJpYXQiOjE1NTAyNTk0MzgsIm5iZiI6MTU1MDI1OTQzOCwiZXhwIjoxNTUyNjc4NjM4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.SrdpW2M148o7QVaufUIl-ZHnuWQAtyeF38zn5TyWiNTCmOQH9q0r7iiaF2J35EUVuXsIplN6cIMUOtIQgwm9kGPRaf982KaVIt0ki8XO3j2N1IefBygAQXV41lSEf1UBLK78uD39qZEYtKPWfi66jRbsXfVdFY45IJelNH_8OEzfl-urQnjHwwr3uuUvtNHEbiGxs6sAXKEY7f1fXNoCviKpKU4ls0sTdJYApg3ugF3mASLkAWk_2xbGh-Wxw4MeHkBLM0ggHD-wLYvd0SdZILcfGdszzPIgUFNy1vSSUqHga-ZRwkhOT8B5Nx1EJaOZHHGOfwnGuikPnNC_HsDI3AQrjQ0-952U0YkExD0cZvx4sKwYwW0fdiWrjPD9Q1Vt-9BEHERxkCGCtBrZMICDfO1vEEkFMQnxs8hl2zS9n7k3CRH6rSxes2t9FZk360OCUJ0OujqrN4huMD2abz1i-dZbgPw38iMPx8eq1kM-_OW0p1FABLpeW-RGoQlVTVHt0ZBFjSUAfgni5kDsywt587X4_eluiJbUwqYcgYr5PpRg6ypl7BzMmoCNT3AOIoT4YqjsNSkrsS-12Q0xXHPdUjItQrLZle93aAwCLFhuh_B0CLCeK7ladpEkSXQhXMJrL8aQBPsjZuUbLXBw97FAhO9v68mjrR3PUDWrIR-VKWE";
+      var config = {
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      };
+      axios.get('http://master-data.local/api/course', config).then(function (response) {
+        responseCallback(response.data.data);
+      });
+    }
+  }]);
+
+  return ServiceAPI;
+}();
 
 
 
