@@ -1,22 +1,18 @@
 <template>
-    <main role="main">
+    <div class="album py-5 bg-light">
+        <div class="container">
 
-        <div class="album py-5 bg-light">
-            <div class="container">
+            <div class="row">
 
-                <div class="row">
+                <view-home-feature-course-item
+                        v-for="item in listCourse"
+                        :key="item.id"
+                        :item="item"
+                ></view-home-feature-course-item>
 
-                    <view-home-feature-course-item
-                            v-for="item in listCourse"
-                            :key="item.id"
-                            :item="item"
-                    ></view-home-feature-course-item>
-
-                </div>
             </div>
         </div>
-
-    </main>
+    </div>
 </template>
 
 <script>

@@ -24,6 +24,8 @@ Vue.component('layout-header', require('./components/layouts/HeaderComponent').d
 Vue.component('layout-footer', require('./components/layouts/FooterComponent').default);
 Vue.component('view-home-feature-course', require('./components/views/home/FeatureCourseComponent').default);
 Vue.component('view-home-feature-course-item', require('./components/views/home/FeatureCourseItemComponent').default);
+Vue.component('modal-register', require('./components/layouts/modals/RegisterComponent').default);
+Vue.component('modal-login', require('./components/layouts/modals/LoginComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

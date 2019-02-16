@@ -9,17 +9,27 @@
 
     <!-- Fonts -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
-
+    <style type="text/css">
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+    </style>
 </head>
 
 <body>
 <div id="app">
     <layout-header></layout-header>
-    <view-home-feature-course></view-home-feature-course>
+
+    <main role="main">
+        <view-home-feature-course></view-home-feature-course>
+    </main>
 
     <layout-footer></layout-footer>
+    <modal-register></modal-register>
+    <modal-login></modal-login>
 </div>
 
-<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/app.js')}}?v={{time()}}"></script>
 </body>
 </html>
