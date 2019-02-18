@@ -3,6 +3,9 @@
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <div v-if="requestPending" class="modal-overlay">
+                    <div class="lds-roller"><div></div><div></div><div></div><div></div></div>
+                </div>
                 <form action="">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Đăng nhập</h5>
@@ -11,17 +14,22 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="register_email">Email</label>
-                            <input type="text" class="form-control" id="register_email">
+                        <div v-if="errors.length > 0" class="alert alert-danger" role="alert">
+                            <ul class="mb-0 p-0 list-unstyled">
+                                <li v-for="msg in errors">{{msg}}</li>
+                            </ul>
                         </div>
                         <div class="form-group">
-                            <label for="register_password">Mật khẩu</label>
-                            <input type="text" class="form-control" id="register_password">
+                            <label for="login_email">Email</label>
+                            <input v-model="email" type="text" class="form-control" id="login_email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login_password">Mật khẩu</label>
+                            <input v-model="password" type="password" class="form-control" id="login_password">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Đăng nhập</button>
+                        <button @click="loginAction" type="button" class="btn btn-primary">Đăng nhập</button>
                     </div>
                 </form>
             </div>
@@ -31,8 +39,35 @@
 
 <script>
     export default {
+        data() {
+            return {
+                email: "",
+                password: "",
+                errors: [],
+                requestPending: false
+            }
+        },
+
         created() {
             //
+        },
+
+        methods: {
+            loginAction: function () {
+                this.errors = [];
+                this.requestPending = true;
+                let formParams = {
+                    email: this.email,
+                    password: this.password
+                };
+                API.login(formParams, (response) => {
+                    console.log(response);
+                    this.requestPending = false;
+                }, (errors) => {
+                    this.errors = errors;
+                    this.requestPending = false;
+                });
+            }
         }
     }
 </script>

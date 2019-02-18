@@ -1993,8 +1993,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: "",
+      password: "",
+      errors: [],
+      requestPending: false
+    };
+  },
   created: function created() {//
+  },
+  methods: {
+    loginAction: function loginAction() {
+      var _this = this;
+
+      this.errors = [];
+      this.requestPending = true;
+      var formParams = {
+        email: this.email,
+        password: this.password
+      };
+      API.login(formParams, function (response) {
+        console.log(response);
+        _this.requestPending = false;
+      }, function (errors) {
+        _this.errors = errors;
+        _this.requestPending = false;
+      });
+    }
   }
 });
 
@@ -37370,100 +37405,159 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "loginModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm.requestPending
+            ? _c("div", { staticClass: "modal-overlay" }, [_vm._m(0)])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("form", { attrs: { action: "" } }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _vm.errors.length > 0
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _c(
+                        "ul",
+                        { staticClass: "mb-0 p-0 list-unstyled" },
+                        _vm._l(_vm.errors, function(msg) {
+                          return _c("li", [_vm._v(_vm._s(msg))])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "login_email" } }, [
+                  _vm._v("Email")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.email,
+                      expression: "email"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "login_email" },
+                  domProps: { value: _vm.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.email = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "login_password" } }, [
+                  _vm._v("Mật khẩu")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "password", id: "login_password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.loginAction }
+                },
+                [_vm._v("Đăng nhập")]
+              )
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "loginModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("form", { attrs: { action: "" } }, [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c(
-                    "h5",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "exampleModalLabel" }
-                    },
-                    [_vm._v("Đăng nhập")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": "Close"
-                      }
-                    },
-                    [
-                      _c("span", { attrs: { "aria-hidden": "true" } }, [
-                        _vm._v("×")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "register_email" } }, [
-                      _vm._v("Email")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "register_email" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "register_password" } }, [
-                      _vm._v("Mật khẩu")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "register_password" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Đăng nhập")]
-                  )
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "lds-roller" }, [
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Đăng nhập")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -52504,14 +52598,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * all outgoing HTTP requests automatically have it attached. This is just
  * a simple convenience so we don't have to attach every token manually.
  */
+// let token = document.head.querySelector('meta[name="csrf-token"]');
+//
+// if (token) {
+//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
 
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -52942,6 +53036,120 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/services/BaseAPI.js":
+/*!******************************************!*\
+  !*** ./resources/js/services/BaseAPI.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BaseAPI; });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var API_URL = "http://master-data.local";
+
+var BaseAPI =
+/*#__PURE__*/
+function () {
+  function BaseAPI() {
+    _classCallCheck(this, BaseAPI);
+
+    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIzN2QzMjQ2NzJlZTcxZDgyNjAxMzNjOGUwOWNlMDM1MGMyMGQ4YzBhNTU2OTVhNzQyYzY3MjFlNmEzZDU3ZmUxZDkzN2ZhOThhZmExYTU4In0.eyJhdWQiOiIyIiwianRpIjoiYjM3ZDMyNDY3MmVlNzFkODI2MDEzM2M4ZTA5Y2UwMzUwYzIwZDhjMGE1NTY5NWE3NDJjNjcyMWU2YTNkNTdmZTFkOTM3ZmE5OGFmYTFhNTgiLCJpYXQiOjE1NTAyNTk0MzgsIm5iZiI6MTU1MDI1OTQzOCwiZXhwIjoxNTUyNjc4NjM4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.SrdpW2M148o7QVaufUIl-ZHnuWQAtyeF38zn5TyWiNTCmOQH9q0r7iiaF2J35EUVuXsIplN6cIMUOtIQgwm9kGPRaf982KaVIt0ki8XO3j2N1IefBygAQXV41lSEf1UBLK78uD39qZEYtKPWfi66jRbsXfVdFY45IJelNH_8OEzfl-urQnjHwwr3uuUvtNHEbiGxs6sAXKEY7f1fXNoCviKpKU4ls0sTdJYApg3ugF3mASLkAWk_2xbGh-Wxw4MeHkBLM0ggHD-wLYvd0SdZILcfGdszzPIgUFNy1vSSUqHga-ZRwkhOT8B5Nx1EJaOZHHGOfwnGuikPnNC_HsDI3AQrjQ0-952U0YkExD0cZvx4sKwYwW0fdiWrjPD9Q1Vt-9BEHERxkCGCtBrZMICDfO1vEEkFMQnxs8hl2zS9n7k3CRH6rSxes2t9FZk360OCUJ0OujqrN4huMD2abz1i-dZbgPw38iMPx8eq1kM-_OW0p1FABLpeW-RGoQlVTVHt0ZBFjSUAfgni5kDsywt587X4_eluiJbUwqYcgYr5PpRg6ypl7BzMmoCNT3AOIoT4YqjsNSkrsS-12Q0xXHPdUjItQrLZle93aAwCLFhuh_B0CLCeK7ladpEkSXQhXMJrL8aQBPsjZuUbLXBw97FAhO9v68mjrR3PUDWrIR-VKWE";
+    var header = {}; // if(props.hasOwnProperty('auth') && props.auth.token != undefined) {
+    //     console.log('Token: ' + props.auth.token);
+    //     header['Authorization'] = `Bearer ${props.auth.token}`;
+    // }
+
+    header['Authorization'] = "Bearer ".concat(token);
+    this.api = axios.create({
+      // base URL is read from the "constructor"
+      baseURL: API_URL,
+      // here are some default headers
+      headers: _objectSpread({}, header, {
+        'Cache-Control': 'no-cache',
+        'Accept': 'application/vn.masterdata.v1+json'
+      }),
+      // 10 second timeout...
+      timeout: 10000
+    });
+  }
+
+  _createClass(BaseAPI, [{
+    key: "processResponse",
+    value: function processResponse(response) {
+      console.log('---- BEGIN process response -----');
+      var data = response.data;
+
+      if (data.hasOwnProperty('data')) {
+        return data.data;
+      }
+
+      console.log(response);
+    }
+  }, {
+    key: "logError",
+    value: function logError(e, error) {
+      console.log(e.toString());
+
+      if (error != undefined) {
+        if (e.response.status == 422) {
+          var errors = e.response.data.errors;
+          var errorMessage = [];
+          Object.keys(errors).forEach(function (key) {
+            errorMessage.push(errors[key][0]);
+          });
+          error(errorMessage);
+        }
+      }
+    }
+  }, {
+    key: "get",
+    value: function get(endpoint, success, error) {
+      var _this = this;
+
+      this.api.get(endpoint).then(function (response) {
+        return _this.processResponse(response);
+      }).then(function (json) {
+        return success(json);
+      }).catch(function (e) {
+        return _this.logError(e, error);
+      });
+    }
+  }, {
+    key: "post",
+    value: function post(endpoint) {
+      var _this2 = this;
+
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var success = arguments.length > 2 ? arguments[2] : undefined;
+      var error = arguments.length > 3 ? arguments[3] : undefined;
+      this.api.post(endpoint, params).then(function (response) {
+        return _this2.processResponse(response);
+      }).then(function (json) {
+        return success(json);
+      }).catch(function (e) {
+        return _this2.logError(e, error);
+      });
+    }
+  }]);
+
+  return BaseAPI;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/services/ServiceAPI.js":
 /*!*********************************************!*\
   !*** ./resources/js/services/ServiceAPI.js ***!
@@ -52952,36 +53160,55 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ServiceAPI; });
+/* harmony import */ var _BaseAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseAPI */ "./resources/js/services/BaseAPI.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
 var ServiceAPI =
 /*#__PURE__*/
-function () {
+function (_BaseAPI) {
+  _inherits(ServiceAPI, _BaseAPI);
+
   function ServiceAPI() {
     _classCallCheck(this, ServiceAPI);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ServiceAPI).apply(this, arguments));
   }
 
   _createClass(ServiceAPI, [{
     key: "loadFeatureCourse",
-    value: function loadFeatureCourse(responseCallback) {
-      var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIzN2QzMjQ2NzJlZTcxZDgyNjAxMzNjOGUwOWNlMDM1MGMyMGQ4YzBhNTU2OTVhNzQyYzY3MjFlNmEzZDU3ZmUxZDkzN2ZhOThhZmExYTU4In0.eyJhdWQiOiIyIiwianRpIjoiYjM3ZDMyNDY3MmVlNzFkODI2MDEzM2M4ZTA5Y2UwMzUwYzIwZDhjMGE1NTY5NWE3NDJjNjcyMWU2YTNkNTdmZTFkOTM3ZmE5OGFmYTFhNTgiLCJpYXQiOjE1NTAyNTk0MzgsIm5iZiI6MTU1MDI1OTQzOCwiZXhwIjoxNTUyNjc4NjM4LCJzdWIiOiIxNiIsInNjb3BlcyI6W119.SrdpW2M148o7QVaufUIl-ZHnuWQAtyeF38zn5TyWiNTCmOQH9q0r7iiaF2J35EUVuXsIplN6cIMUOtIQgwm9kGPRaf982KaVIt0ki8XO3j2N1IefBygAQXV41lSEf1UBLK78uD39qZEYtKPWfi66jRbsXfVdFY45IJelNH_8OEzfl-urQnjHwwr3uuUvtNHEbiGxs6sAXKEY7f1fXNoCviKpKU4ls0sTdJYApg3ugF3mASLkAWk_2xbGh-Wxw4MeHkBLM0ggHD-wLYvd0SdZILcfGdszzPIgUFNy1vSSUqHga-ZRwkhOT8B5Nx1EJaOZHHGOfwnGuikPnNC_HsDI3AQrjQ0-952U0YkExD0cZvx4sKwYwW0fdiWrjPD9Q1Vt-9BEHERxkCGCtBrZMICDfO1vEEkFMQnxs8hl2zS9n7k3CRH6rSxes2t9FZk360OCUJ0OujqrN4huMD2abz1i-dZbgPw38iMPx8eq1kM-_OW0p1FABLpeW-RGoQlVTVHt0ZBFjSUAfgni5kDsywt587X4_eluiJbUwqYcgYr5PpRg6ypl7BzMmoCNT3AOIoT4YqjsNSkrsS-12Q0xXHPdUjItQrLZle93aAwCLFhuh_B0CLCeK7ladpEkSXQhXMJrL8aQBPsjZuUbLXBw97FAhO9v68mjrR3PUDWrIR-VKWE";
-      var config = {
-        headers: {
-          "Authorization": "Bearer " + token
-        }
-      };
-      axios.get('http://master-data.local/api/course', config).then(function (response) {
-        responseCallback(response.data.data);
-      });
+    value: function loadFeatureCourse(success, error) {
+      this.get('/api/course', success, error);
+    }
+  }, {
+    key: "login",
+    value: function login() {
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var success = arguments.length > 1 ? arguments[1] : undefined;
+      var error = arguments.length > 2 ? arguments[2] : undefined;
+      this.post('/api/login', params, success, error);
     }
   }]);
 
   return ServiceAPI;
-}();
+}(_BaseAPI__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 
