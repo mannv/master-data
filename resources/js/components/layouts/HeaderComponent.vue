@@ -8,11 +8,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ</a>
+                    <li class="nav-item">
+                        <router-link to="/" class="nav-link">Trang chủ</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Khoá học</a>
+                        <router-link to="/courses" class="nav-link">Khoá học</router-link>
                     </li>
                 </ul>
                 <form class="form-inline mt-2 mt-md-0">
@@ -32,8 +32,14 @@
 
 <script>
     export default {
+        data () {
+            return {}
+        },
         created() {
             console.log('Layout Header loaded. 2');
+        },
+        methods: {
+
         }
     }
 </script>

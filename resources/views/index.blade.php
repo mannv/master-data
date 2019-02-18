@@ -18,17 +18,7 @@
 </head>
 
 <body>
-<div id="app">
-    <layout-header></layout-header>
-
-    <main role="main">
-        <view-home-feature-course></view-home-feature-course>
-    </main>
-
-    <layout-footer></layout-footer>
-    <modal-register></modal-register>
-    <modal-login></modal-login>
-</div>
+<div id="app"></div>
 
 <script type="text/javascript" src="{{asset('js/app.js')}}?v={{time()}}"></script>
 </body>

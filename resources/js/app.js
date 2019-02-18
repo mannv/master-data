@@ -6,9 +6,12 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+
 import ServiceAPI from './services/ServiceAPI'
+import VueRouter  from "vue-router";
+
+Vue.use(VueRouter)
 window.API = new ServiceAPI();
 
 /**
@@ -24,6 +27,7 @@ window.API = new ServiceAPI();
 
 Vue.component('layout-header', require('./components/layouts/HeaderComponent').default);
 Vue.component('layout-footer', require('./components/layouts/FooterComponent').default);
+
 Vue.component('view-home-feature-course', require('./components/views/home/FeatureCourseComponent').default);
 Vue.component('view-home-feature-course-item', require('./components/views/home/FeatureCourseItemComponent').default);
 Vue.component('modal-register', require('./components/layouts/modals/RegisterComponent').default);
@@ -35,6 +39,37 @@ Vue.component('modal-login', require('./components/layouts/modals/LoginComponent
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
+// const HomeComponent = require('./components/views/home/HomeComponent');
+// const CourseComponent = require('./components/views/course/CourseComponent');
+
+const HomeComponent = () => import('./components/views/home/HomeComponent');
+const CourseComponent = () => import('./components/views/course/CourseComponent');
+
+// const Foo = { template: '<div>Home</div>' }
+// const Bar = { template: '<div>Course</div>' }
+
+const router = new VueRouter({
+    mode: 'history',
+    base: __dirname,
+    routes: [
+        {name: 'home', path: '/', component: HomeComponent },
+        {name: 'courses', path: '/courses', component: CourseComponent }
+    ]
 });
+
+const app = new Vue({
+    router,
+    template: `
+    <div id="app">
+        <layout-header></layout-header>
+    
+        <main role="main">
+            <router-view></router-view>
+        </main>
+    
+        <layout-footer></layout-footer>
+        <modal-register></modal-register>
+        <modal-login></modal-login>
+    </div>
+`
+}).$mount('#app')
