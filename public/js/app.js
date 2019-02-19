@@ -2025,8 +2025,8 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       };
       API.login(formParams, function (response) {
-        console.log(response);
-        store.commit('login', response);
+        console.log(response); // store.commit('login', response);
+
         _this.requestPending = false;
       }, function (errors) {
         _this.errors = errors;

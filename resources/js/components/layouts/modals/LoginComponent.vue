@@ -63,7 +63,7 @@
                 };
                 API.login(formParams, (response) => {
                     console.log(response);
-                    store.commit('login', response);
+                    // store.commit('login', response);
                     this.requestPending = false;
                 }, (errors) => {
                     this.errors = errors;
