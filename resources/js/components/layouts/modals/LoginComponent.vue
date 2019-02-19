@@ -24,7 +24,7 @@
                             <input v-model="email" type="text" class="form-control" id="login_email">
                         </div>
                         <div class="form-group">
-                            <label for="login_password">Mật khẩu</label>
+                            <label for="login_password">Mật khẩu {{this.$store.state.name}}</label>
                             <input v-model="password" type="password" class="form-control" id="login_password">
                         </div>
                     </div>
@@ -49,8 +49,7 @@
         },
 
         created() {
-            console.log(this.$store.state.name);
-            console.log(this.$store.state.user);
+
         },
 
         methods: {
@@ -62,9 +61,10 @@
                     password: this.password
                 };
                 API.login(formParams, (response) => {
-                    console.log(response);
-                    // store.commit('login', response);
+                    this.$store.commit('loginSuccess', response);
                     this.requestPending = false;
+                    $('#loginModal').modal('hide');
+                    window.location = '/';
                 }, (errors) => {
                     this.errors = errors;
                     this.requestPending = false;

@@ -7,30 +7,11 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
+import router from './routes'
+import store from './store'
 
 import ServiceAPI from './services/ServiceAPI'
-import VueRouter  from "vue-router";
-import Vuex from 'vuex'
-
-Vue.use(VueRouter)
-Vue.use(Vuex)
 window.API = new ServiceAPI();
-
-
-const store = new Vuex.Store({
-    state: {
-        user: {},
-        name: ""
-    },
-    mutations: {
-        login (state, user) {
-            state.user = user;
-        },
-        saveName (state) {
-            state.name = "Vai hang";
-        }
-    }
-})
 
 /**
  * The following block of code may be used to automatically register your
@@ -57,24 +38,6 @@ Vue.component('modal-login', require('./components/layouts/modals/LoginComponent
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// const HomeComponent = require('./components/views/home/HomeComponent');
-// const CourseComponent = require('./components/views/course/CourseComponent');
-
-const HomeComponent = () => import('./components/views/home/HomeComponent');
-const CourseComponent = () => import('./components/views/course/CourseComponent');
-
-// const Foo = { template: '<div>Home</div>' }
-// const Bar = { template: '<div>Course</div>' }
-
-const router = new VueRouter({
-    mode: 'history',
-    base: __dirname,
-    routes: [
-        {name: 'home', path: '/', component: HomeComponent },
-        {name: 'courses', path: '/courses', component: CourseComponent }
-    ]
-});
-
 const app = new Vue({
     router,
     store,
@@ -83,12 +46,14 @@ const app = new Vue({
         <layout-header></layout-header>
     
         <main role="main">
-            <router-view></router-view>
+            <div class="container">
+                <router-view></router-view>
+            </div>
         </main>
     
         <layout-footer></layout-footer>
-        <modal-register></modal-register>
-        <modal-login></modal-login>
+        <modal-register v-if="!this.$store.state.loggedIn"></modal-register>
+        <modal-login v-if="!this.$store.state.loggedIn"></modal-login>
     </div>
 `
 }).$mount('#app')
