@@ -18,8 +18,8 @@ export default class BaseAPI {
                 'Cache-Control': 'no-cache',
                 'Accept': 'application/vn.masterdata.v1+json'
             },
-            // 10 second timeout...
-            timeout: 10000
+            // 30 second timeout...
+            timeout: 30000
         });
     }
 
@@ -38,7 +38,7 @@ export default class BaseAPI {
     logError(e, error) {
         console.log(e.toString());
         if (error != undefined) {
-            if (e.response.status == 422) {
+            if (e.response.hasOwnProperty('status') && e.response.status == 422) {
                 let errors = e.response.data.errors;
                 let errorMessage = [];
                 Object.keys(errors).forEach(function (key) {

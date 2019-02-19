@@ -10,9 +10,27 @@ window.Vue = require('vue');
 
 import ServiceAPI from './services/ServiceAPI'
 import VueRouter  from "vue-router";
+import Vuex from 'vuex'
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 window.API = new ServiceAPI();
+
+
+const store = new Vuex.Store({
+    state: {
+        user: {},
+        name: ""
+    },
+    mutations: {
+        login (state, user) {
+            state.user = user;
+        },
+        saveName (state) {
+            state.name = "Vai hang";
+        }
+    }
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -59,6 +77,7 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    store,
     template: `
     <div id="app">
         <layout-header></layout-header>

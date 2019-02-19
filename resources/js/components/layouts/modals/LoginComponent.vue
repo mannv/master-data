@@ -49,7 +49,8 @@
         },
 
         created() {
-            //
+            console.log(this.$store.state.name);
+            console.log(this.$store.state.user);
         },
 
         methods: {
@@ -62,6 +63,7 @@
                 };
                 API.login(formParams, (response) => {
                     console.log(response);
+                    store.commit('login', response);
                     this.requestPending = false;
                 }, (errors) => {
                     this.errors = errors;
