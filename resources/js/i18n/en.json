@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "home": "Home",
+    "courses": "Courses list",
+    "login": "Login",
+    "register": "Register"
+  },
+  "language": {
+    "vn": "Vietnamese",
+    "en": "English"
+  }
+}

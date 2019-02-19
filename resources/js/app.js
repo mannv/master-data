@@ -9,7 +9,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 import router from './routes'
 import store from './store'
+import VueI18n  from "vue-i18n";
 
+Vue.use(VueI18n)
 import ServiceAPI from './services/ServiceAPI'
 window.API = new ServiceAPI();
 
@@ -38,9 +40,21 @@ Vue.component('modal-login', require('./components/layouts/modals/LoginComponent
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const messages = {
+    en: require('./i18n/en.json'),
+    vn: require('./i18n/vn.json'),
+}
+
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+    locale: store.state.locale, // set locale
+    messages, // set locale messages
+})
+
 const app = new Vue({
     router,
     store,
+    i18n,
     template: `
     <div id="app">
         <layout-header></layout-header>

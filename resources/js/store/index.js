@@ -12,7 +12,8 @@ const store = new Vuex.Store({
     plugins: [vuexPersist.plugin],
     state: {
         user: {},
-        loggedIn: false
+        loggedIn: false,
+        locale: 'vn'
     },
     mutations: {
         loginSuccess(state, user) {
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
         logoutSuccess(state) {
             state.user = {};
             state.loggedIn = false;
+        },
+        changeLocale(state, locale) {
+            state.locale = locale;
         }
     }
 })

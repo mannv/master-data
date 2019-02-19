@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "courses": "Danh sách khoá học",
+    "login": "Đăng nhập",
+    "register": "Đăng ký"
+  },
+  "language": {
+    "vn": "Tiếng Việt",
+    "en": "Tiếng Anh"
+  }
+}
