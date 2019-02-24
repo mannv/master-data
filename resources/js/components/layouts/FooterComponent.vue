@@ -1,5 +1,5 @@
 <template>
-    <footer class="text-muted">
+    <footer class="text-muted bg-white mt-4">
         <div class="container">
             <p class="float-right">
                 <a href="#">Lên đầu trang</a>

@@ -4,7 +4,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div v-if="requestPending" class="modal-overlay">
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div></div>
+                    <div class="lds-roller">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <form action="">
                     <div class="modal-header">
@@ -55,6 +60,17 @@
         methods: {
             loginAction: function () {
                 this.errors = [];
+                if (this.email.length == 0) {
+                    this.errors.push('Vui lòng nhập địa chỉ email');
+                }
+                if (this.password.length == 0) {
+                    this.errors.push('Vui lòng nhập mật khẩu');
+                }
+
+                if (this.errors.length > 0) {
+                    return;
+                }
+
                 this.requestPending = true;
                 let formParams = {
                     email: this.email,

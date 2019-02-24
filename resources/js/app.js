@@ -10,10 +10,11 @@ window.Vue = require('vue');
 import router from './routes'
 import store from './store'
 import VueI18n  from "vue-i18n";
+import helpers  from "./helpers";
 
 Vue.use(VueI18n)
 import ServiceAPI from './services/ServiceAPI'
-window.API = new ServiceAPI();
+window.API = new ServiceAPI(store);
 
 /**
  * The following block of code may be used to automatically register your
@@ -33,6 +34,7 @@ Vue.component('view-home-feature-course', require('./components/views/home/Featu
 Vue.component('view-home-feature-course-item', require('./components/views/home/FeatureCourseItemComponent').default);
 Vue.component('modal-register', require('./components/layouts/modals/RegisterComponent').default);
 Vue.component('modal-login', require('./components/layouts/modals/LoginComponent').default);
+Vue.component('course-lesson-list', require('./components/views/course/detail/CourseDetailLessonComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -52,6 +54,7 @@ const i18n = new VueI18n({
 })
 
 const app = new Vue({
+    mixins: [helpers],
     router,
     store,
     i18n,
