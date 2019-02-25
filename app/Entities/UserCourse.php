@@ -3,27 +3,28 @@
 namespace App\Entities;
 
 /**
- * Class Course.
+ * Class UserCourse.
  *
  * @package namespace App\Entities;
  */
-class Course extends BaseModel
+class UserCourse extends BaseModel
 {
-    protected $table = 'courses';
+    protected $table = 'user_courses';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'alias', 'cover_image', 'description'];
+    protected $fillable = ['user_id', 'course_id'];
 
     protected $hidden = ['updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function lessons()
+    public function course()
     {
-        return $this->hasMany(Lesson::class, 'course_id', 'id')->orderBy('weight');
+        return $this->hasOne(Course::class, 'id', 'course_id');
     }
 }

@@ -41,4 +41,11 @@ class MyRepositoryEloquent extends BaseRepository implements MyRepository
         return $this->paginate();
     }
 
+    public function firstRow($result)
+    {
+        if (empty($result['data'])) {
+            return null;
+        }
+        return array_shift($result['data']);
+    }
 }

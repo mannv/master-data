@@ -23,19 +23,22 @@
         data() {
             return {
                 course: null,
-                lesson: null
+                lesson: null,
+                lessonId: 0
             }
         },
         created() {
+            this.lessonId = this.$route.params.id;
             this.loadLessonDetail();
         },
         methods: {
             loadLessonDetail: function () {
-                let lessonId = this.$route.params.id;
-
-                API.lessonDetail(lessonId, (response) => {
+                API.lessonDetail(this.lessonId, (response) => {
                     this.lesson = response;
                     this.course = response["course"];
+                    if (this.lesson.lesson_save.learn == 0) {
+                        this.saveLesson();
+                    }
                 }, (errors) => {
                     console.log(errors);
                 });
@@ -44,7 +47,15 @@
             getYoutubeId: function (youtubeURL) {
                 let url = new URL(youtubeURL);
                 let v = url.searchParams.get("v");
-                return "https://www.youtube.com/embed/"+ v +"?rel=0"
+                return "https://www.youtube.com/embed/" + v + "?rel=0"
+            },
+
+            saveLesson: function () {
+                API.saveLesson({lesson_id: this.lessonId}, (response) => {
+                    console.log(response);
+                }, (errors) => {
+                    console.log(errors);
+                });
             }
         }
     }

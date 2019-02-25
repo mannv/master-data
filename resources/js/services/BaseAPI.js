@@ -32,7 +32,7 @@ export default class BaseAPI {
             return data.data;
         }
 
-        console.log(response);
+        return data;
     }
 
     logError(e, error) {
@@ -63,6 +63,13 @@ export default class BaseAPI {
 
     post(endpoint, params = {}, success, error) {
         this.api.post(endpoint, params)
+            .then(response => this.processResponse(response))
+            .then(json => success(json))
+            .catch(e => this.logError(e, error))
+    }
+
+    put(endpoint, params = {}, success, error) {
+        this.api.put(endpoint, params)
             .then(response => this.processResponse(response))
             .then(json => success(json))
             .catch(e => this.logError(e, error))

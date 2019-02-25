@@ -2191,8 +2191,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['item', 'alias']
+  props: ['item', 'alias', 'registered']
 });
 
 /***/ }),
@@ -41207,7 +41209,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "text-muted bg-white mt-4" }, [
+    return _c("footer", { staticClass: "text-muted mt-4" }, [
       _c("div", { staticClass: "container" }, [
         _c("p", { staticClass: "float-right" }, [
           _c("a", { attrs: { href: "#" } }, [_vm._v("Lên đầu trang")])
@@ -41219,17 +41221,6 @@ var staticRenderFns = [
           _vm._v(" với "),
           _c("strong", { staticClass: "text-danger" }, [_vm._v("Laravel")]),
           _vm._v(" 5.7.26")
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("\n            Thông tin tác giả"),
-          _c("br"),
-          _vm._v(" "),
-          _c("strong", [_vm._v("Nguyễn Văn Mận")]),
-          _c("br"),
-          _vm._v("\n            email: anhmantk@gmail.com"),
-          _c("br"),
-          _vm._v("\n            skype: anhmantk\n        ")
         ])
       ])
     ])
@@ -41858,7 +41849,7 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-10" }, [
-          _vm.item["is_free"] == 1
+          _vm.item["is_free"] == 1 || _vm.registered == 1
             ? _c(
                 "h4",
                 [
@@ -41880,18 +41871,30 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.item["is_free"] == 0
+          _vm.item["is_free"] == 0 && _vm.registered == 0
             ? _c("h4", [_vm._v(_vm._s(_vm.item["name"]))])
             : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-1 text-center" }, [
-          _c("span", [_vm._v(_vm._s(_vm.item["duration"]) + " s")])
+          _c("span", [_vm._v(_vm._s(_vm.item["duration"]))])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-1 text-center" }, [
-          _vm.item["is_free"] == 1
-            ? _c("i", { staticClass: "fas fa-play" })
+          _vm.item["is_free"] == 1 || _vm.registered == 1
+            ? _c("i", {
+                staticClass: "fas fa-lg",
+                class: {
+                  "fa-play-circle text-primary":
+                    _vm.item.lesson_save.finish == 0 &&
+                    _vm.item.lesson_save.learn == 0,
+                  "fa-clock text-warning":
+                    _vm.item.lesson_save.finish == 0 &&
+                    _vm.item.lesson_save.learn == 1,
+                  "fa-check-circle text-success":
+                    _vm.item.lesson_save.finish == 1
+                }
+              })
             : _vm._e()
         ])
       ])
@@ -58650,7 +58653,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 var HomeComponent = function HomeComponent() {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/home/HomeComponent */ "./resources/js/components/views/home/HomeComponent.vue"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/home/HomeComponent */ "./resources/js/components/views/home/HomeComponent.vue"));
 };
 
 var CourseComponent = function CourseComponent() {
@@ -58662,11 +58665,11 @@ var MyCourseComponent = function MyCourseComponent() {
 };
 
 var CourseDetailComponent = function CourseDetailComponent() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/course/detail/CourseDetailComponent */ "./resources/js/components/views/course/detail/CourseDetailComponent.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../components/views/course/detail/CourseDetailComponent */ "./resources/js/components/views/course/detail/CourseDetailComponent.vue"));
 };
 
 var CoursePlayComponent = function CoursePlayComponent() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/views/course/detail/CoursePlayComponent */ "./resources/js/components/views/course/detail/CoursePlayComponent.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/views/course/detail/CoursePlayComponent */ "./resources/js/components/views/course/detail/CoursePlayComponent.vue"));
 };
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -58758,7 +58761,7 @@ function () {
         return data.data;
       }
 
-      console.log(response);
+      return data;
     }
   }, {
     key: "logError",
@@ -58811,6 +58814,22 @@ function () {
         return success(json);
       }).catch(function (e) {
         return _this2.logError(e, error);
+      });
+    }
+  }, {
+    key: "put",
+    value: function put(endpoint) {
+      var _this3 = this;
+
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var success = arguments.length > 2 ? arguments[2] : undefined;
+      var error = arguments.length > 3 ? arguments[3] : undefined;
+      this.api.put(endpoint, params).then(function (response) {
+        return _this3.processResponse(response);
+      }).then(function (json) {
+        return success(json);
+      }).catch(function (e) {
+        return _this3.logError(e, error);
       });
     }
   }]);
@@ -58886,6 +58905,27 @@ function (_BaseAPI) {
     key: "lessonDetail",
     value: function lessonDetail(lessonId, success, error) {
       this.get('/api/lesson/' + lessonId, success, error);
+    }
+  }, {
+    key: "myCourse",
+    value: function myCourse(success, error) {
+      this.get('/api/course/my-course', success, error);
+    }
+  }, {
+    key: "registerCourse",
+    value: function registerCourse() {
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var success = arguments.length > 1 ? arguments[1] : undefined;
+      var error = arguments.length > 2 ? arguments[2] : undefined;
+      this.post('/api/course', params, success, error);
+    }
+  }, {
+    key: "saveLesson",
+    value: function saveLesson() {
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var success = arguments.length > 1 ? arguments[1] : undefined;
+      var error = arguments.length > 2 ? arguments[2] : undefined;
+      this.post('/api/lesson', params, success, error);
     }
   }]);
 

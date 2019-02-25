@@ -8,14 +8,23 @@
                 <h1>{{course['name']}}</h1>
                 <p class="lead">{{course['description']}}</p>
 
-                <button type="button" class="btn btn-primary">
+                <button v-if="!registered" @click="registerCourse" type="button" class="btn btn-primary">
                     <i class="fas fa-play"></i> Đăng ký học
                 </button>
+                <div v-if="showMessageSuccess" class="alert alert-success" role="alert">
+                    Đăng ký khoá học thành công
+                </div>
             </div>
         </div>
 
-        <h2 class="mt-5">Danh sách bài học</h2>
-        <course-lesson-list v-for="item in course['lessons']" :key="item['id']" :item="item" :alias="course['alias']"></course-lesson-list>
+        <h2 class="mt-5">Danh sách bài học {{course['registered']}}</h2>
+        <course-lesson-list v-for="item in course['lessons']"
+                            :key="item['id']"
+                            :item="item"
+                            :registered="registered"
+                            :alias="course['alias']">
+
+        </course-lesson-list>
     </div>
 </template>
 
@@ -23,7 +32,9 @@
     export default {
         data() {
             return {
-                course: null
+                course: null,
+                registered: false,
+                showMessageSuccess: false
             }
         },
         created() {
@@ -35,9 +46,21 @@
 
                 API.courseDetail(courseId, (response) => {
                     this.course = response;
+                    this.registered = response.registered;
                 }, (errors) => {
                     console.log(errors);
                 });
+            },
+            registerCourse: function () {
+                let courseId = this.$route.params.id;
+                API.registerCourse({course_id: courseId}, (response) => {
+                    if(response.status == 1) {
+                        this.registered = true;
+                        this.showMessageSuccess = true;
+                    }
+                }, (error) => {
+                    console.log(error);
+                })
             }
         }
     }

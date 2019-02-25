@@ -17,4 +17,17 @@ export default class ServiceAPI extends BaseAPI {
     lessonDetail(lessonId, success, error) {
         this.get('/api/lesson/' + lessonId, success, error);
     }
+
+    myCourse(success, error) {
+        this.get('/api/course/my-course', success, error);
+    }
+
+
+    registerCourse(params = {}, success, error) {
+        this.post('/api/course', params, success, error);
+    }
+
+    saveLesson(params = {}, success, error) {
+        this.post('/api/lesson', params, success, error);
+    }
 }

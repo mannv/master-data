@@ -38,6 +38,11 @@ $rateLimit = [
 $api->version('v1', $rateLimit, function (\Dingo\Api\Routing\Router $api) {
     $api->get('/users', 'UserController@index');
     $api->get('/course', 'CourseController@index');
+    $api->post('/course', 'CourseController@store');
+    $api->get('/course/my-course', 'CourseController@myCourse');
     $api->get('/course/{id}', 'CourseController@show');
+
     $api->get('/lesson/{id}', 'LessonController@show');
+    $api->post('/lesson', 'LessonController@store');
+    $api->put('/lesson', 'LessonController@update');
 });

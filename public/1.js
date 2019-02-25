@@ -13,9 +13,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      listCourse: []
+    };
+  },
   created: function created() {
-    console.log('Component Header loaded.');
+    this.getMyCourse();
+  },
+  methods: {
+    getMyCourse: function getMyCourse() {
+      var _this = this;
+
+      API.myCourse(function (response) {
+        _this.listCourse = response;
+      }, function (errors) {
+        console.log(errors);
+      });
+    }
   }
 });
 
@@ -36,7 +79,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("My Course")])
+  return _c("div", { staticClass: "div" }, [
+    _c("h1", [_vm._v("My Course")]),
+    _vm._v(" "),
+    _vm.listCourse.length > 0
+      ? _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.listCourse, function(item) {
+            return _c("div", { key: item["id"], staticClass: "col-4" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: item["cover_image"], alt: item["name"] }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(_vm._s(item["description"]))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-7" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "course-detail",
+                                params: { id: item["id"] }
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-play text-green" }),
+                            _vm._v(
+                              "\n                                Học ngay\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(
+                          " (0/" +
+                            _vm._s(item["lessons_count"]) +
+                            ")\n                        "
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-5 text-right" }, [
+                      _c("i", { staticClass: "fas fa-clock" }),
+                      _vm._v(
+                        " " +
+                          _vm._s(item["created_at"]) +
+                          "\n                        "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          }),
+          0
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
