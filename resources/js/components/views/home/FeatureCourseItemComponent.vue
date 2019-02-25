@@ -8,15 +8,14 @@
             </div>
             <div class="card-body">
                 <h2>
-                    <router-link :to="{name: 'course-detail', params: {id: item.id}}" class="nav-link">{{item.name}}</router-link>
+                    <router-link :to="{name: 'course-detail', params: {id: item.id}}">{{item.name}}</router-link>
                 </h2>
                 <p class="card-text">{{ item.description }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        abc
-                    </div>
-                    <small class="text-muted">9 mins</small>
-                </div>
+            </div>
+            <div class="card-footer text-center">
+                <router-link :to="{name: 'course-detail', params: {id: item['id']}}">
+                    <i class="fas fa-play text-green"></i> {{$t('label.learn')}}
+                </router-link>
             </div>
         </div>
     </div>

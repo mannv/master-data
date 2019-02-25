@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('alias');
             $table->string('cover_image');
+            $table->boolean('feature')->default(false);
             $table->text('description')->nullable();
             $table->timestamps();
 		});

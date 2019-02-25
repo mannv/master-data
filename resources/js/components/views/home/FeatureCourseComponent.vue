@@ -1,7 +1,7 @@
 <template>
     <div class="album py-5 bg-light">
+        <h2>{{$t('label.course_feature')}}</h2>
         <div class="row">
-
             <view-home-feature-course-item
                     v-for="item in listCourse"
                     :key="item.id"

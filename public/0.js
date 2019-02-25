@@ -13,9 +13,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      listCourse: [],
+      pagination: "",
+      pageIndex: 1
+    };
+  },
   created: function created() {
-    console.log('Component Header loaded.');
+    console.log('View Home List Course loaded.');
+    this.loadCourse();
+  },
+  methods: {
+    loadCourse: function loadCourse() {
+      var _this = this;
+
+      API.loadCourse(this.pageIndex, function (response) {
+        _this.listCourse = response.items;
+        _this.pagination = response.pagination;
+      });
+    }
   }
 });
 
@@ -36,7 +66,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Danh sach khoa hoc")])
+  return _c("div", { staticClass: "album py-5 bg-light" }, [
+    _c("h2", [_vm._v(_vm._s(_vm.$t("label.course_list")))]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.listCourse, function(item) {
+        return _c("view-home-feature-course-item", {
+          key: item.id,
+          attrs: { item: item }
+        })
+      }),
+      1
+    ),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "text-center" }, [
+      _c("div", { domProps: { innerHTML: _vm._s(_vm.pagination) } })
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

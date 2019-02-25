@@ -8,5 +8,10 @@
   "language": {
     "vn": "Vietnamese",
     "en": "English"
+  },
+  "label": {
+    "learn": "Learn",
+    "course_feature":"Courses feature",
+    "course_list":"Courses lists"
   }
 }

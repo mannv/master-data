@@ -9,5 +9,5 @@ namespace App\Repositories;
  */
 interface CourseRepository extends MyRepository
 {
-    //
+    public function getCourseFeature();
 }

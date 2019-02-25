@@ -7,7 +7,8 @@ $factory->define(\App\Entities\Course::class, function (Faker $faker) {
     return [
         'name' => $name,
         'alias' => \Illuminate\Support\Str::slug($name),
-        'cover_image' => $faker->imageUrl(),
-        'description' => $faker->paragraph
+        'cover_image' => $faker->numberBetween(1, 10) . '.jpg',
+        'description' => $faker->paragraph,
+        'feature' => $faker->randomElement([true, false])
     ];
 });

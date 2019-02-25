@@ -8,5 +8,10 @@
   "language": {
     "vn": "Tiếng Việt",
     "en": "Tiếng Anh"
+  },
+  "label": {
+    "learn": "Học ngay",
+    "course_feature":"Khoá học nổi bật",
+    "course_list":"Danh sách khoá học"
   }
 }

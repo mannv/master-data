@@ -33,4 +33,11 @@ class CourseRepositoryEloquent extends MyRepositoryEloquent implements CourseRep
         $this->setPresenter(app(CoursePresenter::class));
     }
 
+    public function getCourseFeature()
+    {
+        $this->model = $this->model->limit(12);
+        return $this->orderBy('id', 'DESC')->findWhere(['feature' => true]);
+    }
+
+
 }

@@ -29,7 +29,12 @@ class CourseController extends ApiController
     public function index()
     {
         $result = $this->courseRepository->getAllWithPaginate();
-        return $this->responseData($result);
+        return $this->responseData([
+            'data' => [
+                'items' => $result['data'],
+                'pagination' => $result['meta']['pagination']['html']
+            ]
+        ]);
     }
 
     private function checkCourseRegistered($id)

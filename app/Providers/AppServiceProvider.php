@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        AbstractPaginator::currentPathResolver(function(){
+            /** @var \Illuminate\Routing\UrlGenerator $url */
+            $url = app('url');
+            return $url->current();
+        });
     }
 
     /**

@@ -2277,7 +2277,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['item'],
   created: function created() {//
@@ -41924,6 +41923,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "album py-5 bg-light" }, [
+    _c("h2", [_vm._v(_vm._s(_vm.$t("label.course_feature")))]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -41991,7 +41992,6 @@ var render = function() {
             _c(
               "router-link",
               {
-                staticClass: "nav-link",
                 attrs: {
                   to: { name: "course-detail", params: { id: _vm.item.id } }
                 }
@@ -42004,31 +42004,32 @@ var render = function() {
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _vm._v(_vm._s(_vm.item.description))
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-footer text-center" },
+        [
+          _c(
+            "router-link",
+            {
+              attrs: {
+                to: { name: "course-detail", params: { id: _vm.item["id"] } }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-play text-green" }),
+              _vm._v(" " + _vm._s(_vm.$t("label.learn")) + "\n            ")
+            ]
+          )
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-between align-items-center" },
-      [
-        _c("div", { staticClass: "btn-group" }, [
-          _vm._v("\n                    abc\n                ")
-        ]),
-        _vm._v(" "),
-        _c("small", { staticClass: "text-muted" }, [_vm._v("9 mins")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -58620,10 +58621,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************!*\
   !*** ./resources/js/i18n/en.json ***!
   \***********************************/
-/*! exports provided: nav, language, default */
+/*! exports provided: nav, language, label, default */
 /***/ (function(module) {
 
-module.exports = {"nav":{"home":"Home","courses":"Courses list","login":"Login","register":"Register"},"language":{"vn":"Vietnamese","en":"English"}};
+module.exports = {"nav":{"home":"Home","courses":"Courses list","login":"Login","register":"Register"},"language":{"vn":"Vietnamese","en":"English"},"label":{"learn":"Learn","course_feature":"Courses feature","course_list":"Courses lists"}};
 
 /***/ }),
 
@@ -58631,10 +58632,10 @@ module.exports = {"nav":{"home":"Home","courses":"Courses list","login":"Login",
 /*!***********************************!*\
   !*** ./resources/js/i18n/vn.json ***!
   \***********************************/
-/*! exports provided: nav, language, default */
+/*! exports provided: nav, language, label, default */
 /***/ (function(module) {
 
-module.exports = {"nav":{"home":"Trang chủ","courses":"Danh sách khoá học","login":"Đăng nhập","register":"Đăng ký"},"language":{"vn":"Tiếng Việt","en":"Tiếng Anh"}};
+module.exports = {"nav":{"home":"Trang chủ","courses":"Danh sách khoá học","login":"Đăng nhập","register":"Đăng ký"},"language":{"vn":"Tiếng Việt","en":"Tiếng Anh"},"label":{"learn":"Học ngay","course_feature":"Khoá học nổi bật","course_list":"Danh sách khoá học"}};
 
 /***/ }),
 
@@ -58886,7 +58887,12 @@ function (_BaseAPI) {
   _createClass(ServiceAPI, [{
     key: "loadFeatureCourse",
     value: function loadFeatureCourse(success, error) {
-      this.get('/api/course', success, error);
+      this.get('/api/course/feature', success, error);
+    }
+  }, {
+    key: "loadCourse",
+    value: function loadCourse(page, success, error) {
+      this.get('/api/course/?page=' + page, success, error);
     }
   }, {
     key: "login",

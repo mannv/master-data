@@ -15,7 +15,7 @@ class Course extends BaseModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'alias', 'cover_image', 'description'];
+    protected $fillable = ['name', 'alias', 'cover_image', 'description', 'feature'];
 
     protected $hidden = ['updated_at'];
 
