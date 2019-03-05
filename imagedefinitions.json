@@ -1,9 +1,9 @@
 {
   "taskDefinition": {
-    "family": "hello-world",
+    "family": "demo1",
     "containerDefinitions": [
       {
-        "name": "hello-world",
+        "name": "demo1",
         "image": "095422929930.dkr.ecr.us-east-1.amazonaws.com/demo1:latest",
         "cpu": 100,
         "portMappings": [
