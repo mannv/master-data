@@ -3,8 +3,8 @@
     "family": "hello-world",
     "containerDefinitions": [
       {
-        "name": "demo1",
-        "image": "095422929930.dkr.ecr.us-east-1.amazonaws.com/demo1:latest",
+        "name": "hello-world",
+        "image": "095422929930.dkr.ecr.us-east-1.amazonaws.com/demo1",
         "cpu": 100,
         "portMappings": [
           {
